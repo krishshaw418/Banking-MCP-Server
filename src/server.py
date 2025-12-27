@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -16,11 +18,11 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="Banking MCP Server", version="1.0.0", lifespan=lifespan)
 
 DB_CONFIG = {
-    "host": os.getenv("DB_HOST", "localhost"),
-    "database": os.getenv("DB_NAME", "bank_db"),
-    "user": os.getenv("DB_USER", "postgres"),
-    "password": os.getenv("DB_PASSWORD", "Amethyst%40291103"),
-    "port": os.getenv("DB_PORT", "5432")
+    "host": os.getenv("DB_HOST"),
+    "database": os.getenv("DB_NAME"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "port": os.getenv("DB_PORT")
 }
 
 
@@ -302,4 +304,4 @@ async def get_transactions(account_id: int, limit: Optional[int] = 10):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    uvicorn.run(app, host = os.getenv("HOST"), port = int(os.getenv("PORT")))
