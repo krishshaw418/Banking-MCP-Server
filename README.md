@@ -77,13 +77,13 @@ export DB_PORT=5432
 Start the server with:
 
 ```bash
-python banking_server.py
+python src/server.py
 ```
 
 Or using uvicorn directly:
 
 ```bash
-uvicorn banking_server:app --reload
+uvicorn src/server:app --reload
 ```
 
 The server will start at: **http://localhost:8080**
